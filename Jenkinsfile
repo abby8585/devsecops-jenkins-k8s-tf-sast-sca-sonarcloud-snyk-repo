@@ -3,9 +3,9 @@ pipeline {
   tools { 
         maven 'Maven_3_5_2'  
     }
-   stages{
+stages{
 	stage('SnykSASTCodeAnalysis') {
-            	steps {		
+            steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
 					sh 'mvn snyk:code test -fn'
 				}
