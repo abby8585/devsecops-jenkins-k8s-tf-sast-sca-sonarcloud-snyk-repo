@@ -10,7 +10,7 @@ pipeline {
 			}
     }
 	    stage('SnykSASTCodeAnalysis') {
-            steps {		
+            	steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
 					sh 'mvn snyk:code test -fn'
 				}
