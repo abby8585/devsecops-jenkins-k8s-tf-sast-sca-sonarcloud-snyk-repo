@@ -3,22 +3,19 @@ pipeline {
   tools { 
         maven 'Maven_3_5_2'  
     }
-	
-stages{
+   stages{
     stage('CompileandRunSonarAnalysis') {
             steps {	
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=BuggyWepApp -Dsonar.organization=abbybuggywebapp -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=e57a3ad83104ea6f6a628defeef246f051b2fa4b'
 			}
     }
-
-   stage('SnykSASTCodeAnalysis') {
+	    stage('SnykSASTCodeAnalysis') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
 					sh 'mvn snyk:code test -fn'
 				}
 			}
     }
-
 
 	stage('RunSCAAnalysisUsingSnyk') {
             steps {		
@@ -46,7 +43,8 @@ stages{
                 }
             }
     	}
-	   stage('Kubernetes Deployment of ABBY Bugg Web Application') {
+	   
+	stage('Kubernetes Deployment of ASG Bugg Web Application') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
 		  sh('kubectl delete all --all -n devsecops')
@@ -54,8 +52,6 @@ stages{
 		}
 	      }
    	}
-	    
+
   }
 }
-  
-
