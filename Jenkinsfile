@@ -39,8 +39,8 @@ pipeline {
 	   stage('Kubernetes Deployment of ABBY Bugg Web Application') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
-		  sh('kubectl delete all --all -n devsecops')
-		  sh ('kubectl apply -f deployment.yaml --namespace=devsecops')
+		  sh('kubectl delete all --all -n devesecops')
+		  sh ('kubectl apply -f deployment.yaml --namespace=devesecops')
 		}
 	      }
    	}
