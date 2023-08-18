@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: abbybuggy
-        image: 145988340565.dkr.ecr.us-west-2.amazonaws.com/abby
+        image: 883755626042.dkr.ecr.us-west-2.amazonaws.com/abby
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
